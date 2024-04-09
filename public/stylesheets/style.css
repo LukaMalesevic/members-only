@@ -1,8 +1,35 @@
 body {
-  padding: 50px;
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+  height: 100%;
+}
+
+html{
+ font-size: 62.5%;
+ height: 100%;
 }
 
 a {
   color: #00B7FF;
+}
+
+.navigation{
+  display: flex;
+  align-items: center;
+}
+
+.container, form{
+  width: 50%;
+  height: auto;
+  display: flex;
+  align-items: left;
+  justify-content: center;
+  flex-direction: column;
+}
+
+form{
+  gap: 5px;
+}
+
+.message{
+  background-color: gray;
 }

@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <link rel="stylesheet" href="/stylesheets/style.css" type="text/css" >
+</head>
+<body>
+    <nav class="navigation">
+        <a href="/"><button class="member-only-btn">Members only club</button></a>
+        <% if (user) { %>
+          <a href="/new-message"><button>NEW MESSAGE</button></a>
+          <% if (!user.membership_status) { %>
+            <a href="/become-member"><button>BECOME MEMBER</button></a>
+          <% } %>
+          <% if (!user.admin_status) { %>
+            <a href="/become-admin"><button>BECOME ADMIN</button></a>
+          <% } %>
+          <a href="/log-out"><button>LOG OUT</button></a>
+        <% } else { %>
+          <a href="/sign-up"><button>SIGN UP</button></a>
+          <a href="/log-in"><button>LOGIN</button></a>
+        <% } %>
+    </nav>    
+  <div class="container">
+    <h1>Create new message</h1>
+    <h2>Hi, <%= user.username %> </h2>
+    <h2>Whats on your mind?</h2>
+    <form method="POST">
+        <label for="title">Title</label>
+        <input type="text" name="title">
+        <label for="text">Text</label>
+        <input type="text" name="text">
+        <button type="submit">submit</button>
+    </form>
+  </div>
+</body>
+</html>

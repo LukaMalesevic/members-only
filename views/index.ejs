@@ -4,8 +4,50 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Document</title>
+  <link rel="stylesheet" href="/stylesheets/style.css" type="text/css" >
 </head>
 <body>
-  <h1>Index page</h1>
+  <nav class="navigation">
+    <a href="/"><button class="member-only-btn">Members only club</button></a>
+    <% if (user) { %>
+      <a href="/new-message"><button>NEW MESSAGE</button></a>
+      <% if (!user.membership_status) { %>
+        <a href="/become-member"><button>BECOME MEMBER</button></a>
+      <% } %>
+      <% if (!user.admin_status) { %>
+        <a href="/become-admin"><button>BECOME ADMIN</button></a>
+      <% } %>
+      <a href="/log-out"><button>LOG OUT</button></a>
+    <% } else { %>
+      <a href="/sign-up"><button>SIGN UP</button></a>
+      <a href="/log-in"><button>LOGIN</button></a>
+    <% } %>
+</nav>    
+  <div class="container">
+    <% if (user) { %>
+      <h1>Welcome <%= user.username %> to a special club for members only</h1>
+    <% } else { %>
+      <h1>Special club for members only</h1>
+    <% } %>
+    <h2>Everybody can send messages</h2>
+    <h2>Non-members can only see titles and contents</h2>
+    <h2>Only members can see the author and date</h2>
+    <h2>Messages:</h2>
+    <div class="message">
+      <% if (messages && messages.length > 0) { %>
+        <% messages.forEach(message => { %>
+          <h3><%= message.title %></h3>
+          <h4><%= message.message_context %></h4>
+          <% if (user && user.membership_status) { %>
+            <h4><%= message.author.username %></h4>
+            <h4><%= message.created_at %></h4>
+          <% } %>
+          <hr>
+        <% }); %>
+      <% } else { %>
+        <h2>There are no messages currently!</h2>
+      <% } %>
+    </div>
+  </div>  
 </body>
 </html>
